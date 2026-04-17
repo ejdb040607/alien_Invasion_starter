@@ -3,8 +3,11 @@ class Settings:
 
     def __init__(self):
         self.name: str = "Alien Invasion"
-        self.screen_wdt = 1200
-        self.screen_hgt = 800
+        self.screen_w = 900
+        self.screen_h = 600
         self.fps = 60
         self.bg_file = Path.cwd() / 'Assets' / 'images' / 'Starbasesnow.png'
-        
+
+        self.ship_file = Path.cwd() / 'Assets' / 'images' / 'ship2(no bg).png'
+        self.ship_w = 40
+        self.ship_h = 60
