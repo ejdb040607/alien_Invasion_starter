@@ -19,35 +19,41 @@ class AlienFleet:
         alien_w = self.settings.alien_w
         screen_w = self.settings.screen_w
 
-        fleet_w = self.calculate_fleet_size(alien_w, screen_w)
+        alien_h = self.settings.alien_h
+        screen_h = self.settings.screen_h
 
-        # half_screen = self.settings.screen_w
+        fleet_w, fleet_h = self.calculate_fleet_size(alien_w, screen_w, alien_h, screen_h)
+        half_screen = self.settings.screen_h // 2
+
         fleet_horizontal_space = fleet_w * alien_w
         x_offset = int((screen_w - fleet_horizontal_space) // 2)
 
-        for col in range(fleet_w):
-            current_x = alien_w * col + x_offset
-            if col % 2 == 0:
-                continue
-            self._create_alien(current_x, 10)
+        fleet_vertical_space = fleet_h * alien_h
+        y_offset = int((half_screen - fleet_vertical_space) // 2)
+
+        for row in range(fleet_h):
+            current_y = alien_h * row + y_offset
+            if row % 2 == 0:
+                    continue
+            for col in range(fleet_w):
+                current_x = alien_w * col + x_offset
+                if col % 2 == 0:
+                    continue
+                self._create_alien(current_x, current_y)
 
 
-    def calculate_fleet_size(self, alien_w, screen_w):
+    def calculate_fleet_size(self, alien_w, screen_w, alien_h, screen_h):
         fleet_w = (screen_w // alien_w) - 1
-
-        ''' This calculation uses a couple extra lines but is used in the tutorial
         if fleet_w % 2 == 0:
             fleet_w -= 1
-        else:
-            fleet_w -= 2
-        If restoring this, remove the other 'if fleet_w % 2' statement 
-        and the '- 1' in the initial fleet_w calculation
-        '''
-        
-        if fleet_w % 2 != 0:
-            fleet_w -= 1
 
-        return fleet_w
+        fleet_h = ((screen_h // 2) // alien_h) - 1
+        if fleet_h % 2 == 0:
+            fleet_h -= 1
+        
+        print(fleet_h)
+
+        return fleet_w, fleet_h
         
     def _create_alien(self, current_x: int, current_y: int):
         new_alien = Alien(self, current_x, current_y)
