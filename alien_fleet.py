@@ -13,7 +13,8 @@ class AlienFleet:
         self.fleet_direction = self.settings.fleet_direction
         self.fleet_drop_speed = self.settings.fleet_drop_speed
 
-        self.create_fleet()
+        # self.create_fleet()
+
 
     def create_fleet(self):
         alien_w = self.settings.alien_w
@@ -50,7 +51,6 @@ class AlienFleet:
 
         return x_offset, y_offset
 
-
     def calculate_fleet_size(self, alien_w, screen_w, alien_h, screen_h):
         fleet_w = (screen_w // alien_w) - 1
         if fleet_w % 2 == 0:
@@ -68,6 +68,24 @@ class AlienFleet:
         new_alien = Alien(self, current_x, current_y)
 
         self.fleet.add(new_alien)
+
+
+    def _check_fleet_edges(self):
+        alien: Alien
+        for alien in self.fleet:
+            if alien.check_edges():
+                self._drop_alien_fleet()
+                self.fleet_direction *= -1
+                break
+
+    def _drop_alien_fleet(self):
+        for alien in self.fleet:
+            alien.y += self.fleet_drop_speed
+
+    def update_fleet(self):
+        self._check_fleet_edges()
+        self.fleet.update()
+
 
     def draw(self):
         alien: 'Alien'

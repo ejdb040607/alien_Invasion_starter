@@ -31,13 +31,14 @@ class AlienInvasion:
 
         self.ship = Ship(self, Arsenal(self))
         self.alien_fleet = AlienFleet(self)
+        self.alien_fleet.create_fleet()
 
     def run_game(self):
         # Game loop
         while self.running:
             self._check_events()
             self.ship.update()
-            self.alien_fleet.draw()
+            self.alien_fleet.update_fleet()
             self._update_screen()
             self.clock.tick(self.settings.fps)
 
