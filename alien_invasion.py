@@ -39,8 +39,25 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self.alien_fleet.update_fleet()
+            self._check_coillisions()
             self._update_screen()
             self.clock.tick(self.settings.fps)
+
+    def _check_coillisions(self):
+        # Check collisions for ship
+        if self.ship.check_collisions(self.alien_fleet.fleet):
+            self._reset_level()
+            # Subtract one life
+
+        # Check collisions for aliens and bottom of screen
+
+        # Check collisions of projectiles and aliens
+
+    def _reset_level(self):
+        self.ship.arsenal.bullets.empty()
+        self.alien_fleet.fleet.empty()
+        self.alien_fleet.create_fleet()
+
 
     def _update_screen(self):
         self.screen.blit(self.bg, (0,0))

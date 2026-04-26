@@ -11,24 +11,24 @@ class Arsenal:
         self.settings = game.settings
         # self.screen = game.screen
         # self.boundaries = game.screen.get_rect()
-        self.arsenal = pygame.sprite.Group()
+        self.bullets = pygame.sprite.Group()
 
     def update_arsenal(self):
-        self.arsenal.update()
+        self.bullets.update()
         self._remove_bullets_offscreen()
 
     def _remove_bullets_offscreen(self):
-        for bullet in self.arsenal.copy():
+        for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
-                self.arsenal.remove(bullet)
+                self.bullets.remove(bullet)
 
     def draw(self):
-        for bullet in self.arsenal:
+        for bullet in self.bullets:
             bullet.draw_bullet()
 
     def fire_bullet(self):
-        if len(self.arsenal) < self.settings.bullet_amount:
+        if len(self.bullets) < self.settings.bullet_amount:
             new_bullet = Bullet(self.game)
-            self.arsenal.add(new_bullet)
+            self.bullets.add(new_bullet)
             return True
         return False
