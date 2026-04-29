@@ -1,3 +1,9 @@
+'''
+Ship
+Evan Blanton
+April 29th, 2026
+Contains methods for drawing and updating the movement of the player controlled ship.
+'''
 import pygame
 from typing import TYPE_CHECKING
 

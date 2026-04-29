@@ -1,3 +1,9 @@
+'''
+Button
+Evan Blanton
+April 29th, 2026
+Contains the Button class which is used to create and display the play button.
+'''
 import pygame.font
 from typing import TYPE_CHECKING
 

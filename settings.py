@@ -1,3 +1,9 @@
+'''
+Settings
+Evan Blanton
+April 29th, 2026
+Contains variables for different part of the game such as file paths, sizes, speed, etc.
+'''
 from pathlib import Path
 class Settings:
 

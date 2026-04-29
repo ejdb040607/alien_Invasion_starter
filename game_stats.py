@@ -1,4 +1,9 @@
-# from pathlib import Path
+'''
+Game Stats
+Evan Blanton
+April 29th, 2026
+Contains game stats that are actively updated and kept track of during the game.
+'''
 import json
 from typing import TYPE_CHECKING
 

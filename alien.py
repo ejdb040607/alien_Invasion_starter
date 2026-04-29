@@ -1,3 +1,9 @@
+'''
+Alien
+Evan Blanton
+April 29th, 2026
+Contains methods for updating the position of and drawing individual aliens in the fleet.
+'''
 import pygame
 from pygame.sprite import Sprite
 from typing import TYPE_CHECKING

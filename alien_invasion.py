@@ -1,3 +1,9 @@
+'''
+Alien Invasion
+Evan Blanton
+April 29th, 2026
+Contains the main game loop and logic for the Alien Invasion game.
+'''
 import sys
 import pygame
 from time import sleep

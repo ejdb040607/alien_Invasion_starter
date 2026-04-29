@@ -1,3 +1,9 @@
+'''
+Alien Fleet
+Evan Blanton
+April 29th, 2026
+Contains the AlienFleet class which manages the enemy sprites.
+'''
 import pygame
 from typing import TYPE_CHECKING
 

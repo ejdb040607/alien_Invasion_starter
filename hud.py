@@ -1,3 +1,9 @@
+'''
+HUD
+Evan Blanton
+April 29th, 2026
+Creates and displays the HUD to show scores, lives left, and level.
+'''
 import pygame.font
 from typing import TYPE_CHECKING
 

@@ -1,3 +1,9 @@
+'''
+Arsenal
+Evan Blanton
+April 29th, 2026
+Contains the Arsenal class which keeps track of the bullets fired by the player.
+'''
 import pygame
 from typing import TYPE_CHECKING
 from bullet import Bullet
