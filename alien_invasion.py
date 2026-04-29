@@ -15,6 +15,7 @@ from arsenal import Arsenal
 from alien_fleet import AlienFleet
 from button import Button
 from hud import HUD
+from upgrades import Upgrades
 
 class AlienInvasion:
 
@@ -48,7 +49,9 @@ class AlienInvasion:
         self.ship = Ship(self, Arsenal(self))
         self.alien_fleet = AlienFleet(self)
         self.alien_fleet.create_fleet()
-        self.play_button = Button(self, "Play")
+        self.upgrades = Upgrades(self)
+        self.play_button = Button(self, "Play", 'play')
+        self.upgrading = False
         self.game_active = False
 
     def run_game(self):
@@ -85,6 +88,9 @@ class AlienInvasion:
            self.settings.increase_difficulty()
            self.game_stats.update_level()
            self.HUD.update_level()
+           self.upgrading = True
+           self.game_active = False
+           self.upgrades.pick_upgrades()
 
     def _check_game_status(self):
         if self.game_stats.ships_left > 0:
@@ -120,8 +126,14 @@ class AlienInvasion:
         if not self.game_active:
             self.play_button.draw()
             pygame.mouse.set_visible(True)
+        if self.upgrading:
+            self.upgrades.upgrade_button1.draw()
+            self.upgrades.upgrade_button2.draw()
+            self.upgrades.upgrade_button3.draw()
+            pygame.mouse.set_visible(True)
 
         pygame.display.flip()
+
 
     def _check_events(self):
         for event in pygame.event.get():
@@ -135,12 +147,33 @@ class AlienInvasion:
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                self._check_button_clicked()
+                if self.upgrading:
+                    self._check_upgrade_button_clicked()
+                elif not self.game_active:
+                    self._check_play_button_clicked()
 
-    def _check_button_clicked(self):
+    def _check_play_button_clicked(self):
         mouse_pos = pygame.mouse.get_pos()
         if self.play_button.check_clicked(mouse_pos):
             self.restart_game()
+    
+    def _check_upgrade_button_clicked(self):
+        mouse_pos = pygame.mouse.get_pos()
+        upgrade_clicked = False
+        if self.upgrades.upgrade_button1.check_clicked(mouse_pos):
+            upgrade_clicked = True
+            self.upgrades.apply_upgrade(self.upgrades.upgrade_button1.msg)
+        elif self.upgrades.upgrade_button2.check_clicked(mouse_pos):
+            upgrade_clicked = True
+            self.upgrades.apply_upgrade(self.upgrades.upgrade_button2.msg)
+        elif self.upgrades.upgrade_button3.check_clicked(mouse_pos):
+            upgrade_clicked = True
+            self.upgrades.apply_upgrade(self.upgrades.upgrade_button3.msg)
+        
+        if upgrade_clicked:
+            self.upgrading = False
+            self.game_active = True
+    
 
     def _check_keydown_events(self, event):
         if event.key == pygame.K_RIGHT:

@@ -36,7 +36,6 @@ class Ship:
         self.x = float(self.rect.x)
 
     def update(self):
-        # Updating the position of the the ship
         self._update_ship_movement()
         self.arsenal.update_arsenal()
 
