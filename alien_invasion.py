@@ -77,14 +77,14 @@ class AlienInvasion:
         if self.alien_fleet.check_destroyed_status():
            self._reset_level()
            self.settings.increase_difficulty()
-           # Update game stats level
            self.game_stats.update_level()
-           # Update HUD view
+           self.HUD.update_level()
 
     def _check_game_status(self):
         if self.game_stats.ships_left > 0:
             self.game_stats.ships_left -= 1
             self._reset_level()
+            self.game_stats.update_level()
             sleep(0.5)
         else:
             self.game_active = False
