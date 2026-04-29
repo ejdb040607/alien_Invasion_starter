@@ -1,5 +1,6 @@
 import pygame
 from typing import TYPE_CHECKING
+
 from alien import Alien
 
 if TYPE_CHECKING:
